@@ -30,8 +30,9 @@
 
 <body>
 
-<div class="jumbotron text-center">
+<div id="my_id" class="jumbotron text-center">
     <h1>Codecool Shop</h1>
+    <p hidden id="itemsInCartNumber">0</p>
 </div>
 
 <div class="container">
@@ -40,10 +41,6 @@
             <a href="#"><strong th:text="${category.name}"></strong></a>
         </div>
     </div>
-<!--    <div class="card" th:each="category,iterStat : ${categories}">-->
-<!--        <strong th:text="${category.name}">Category Title</strong>-->
-
-
 
     <div id="products" class="row">
         <div class="col col-sm-12 col-md-6 col-lg-4" th:each="prod,iterStat : ${products}">
@@ -58,7 +55,7 @@
                         <p class="lead" th:text="${prod.getPrice()}">100 USD</p>
                     </div>
                     <div class="card-text">
-                        <a class="btn btn-success" href="#">Add to cart</a>
+                        <form action="/cart" method="post"><input type="hidden" name="prod_id" th:value="${prod.id}"><button class="btn btn-success" type="submit">Add to cart</button></form>
                     </div>
                 </div>
             </div>

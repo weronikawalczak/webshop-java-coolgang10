@@ -19,6 +19,11 @@ import java.util.Map;
 
 @WebServlet(urlPatterns = {"/"})
 public class ProductController extends HttpServlet {
+    public static ProductController getInstance() {
+        return instance;
+    }
+
+    private static ProductController instance = new ProductController();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -39,5 +44,4 @@ public class ProductController extends HttpServlet {
     // params.put("category", productCategoryDataStore.find(1));
     // params.put("products", productDataStore.getBy(productCategoryDataStore.find(1)));
     // context.setVariables(params);
-
 }

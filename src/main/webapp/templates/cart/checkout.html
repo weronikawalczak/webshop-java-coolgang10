@@ -31,35 +31,27 @@
 <body>
 
 <div class="jumbotron text-center">
-    <h1>Cart</h1>
+    <h1>Checkout</h1>
 </div>
 
 <div class="container">
-    <table id="products" border="1">
-        <tbody>
-            <thead>
-                <th>name</th>
-                <th>quantity</th>
-                <th>price</th>
-            </thead>
-            <tr th:each="prod : ${products}">
-                <td th:text="${prod.key.name}"></td>
-                <td th:text="${prod.value}"></td>
-                <td th:text="${prod.key.price}"></td>
-                <td><a class="btn btn-warning" href="#">Remove</a></td>
-            </tr>
-        </tbody>
-        <tfoot>
-        <tr>
-            <td></td>
-            <td><b>Sum</b></td>
-            <td th:text="${sum}"></td>
-        </tr>
-        </tfoot>
-    </table>
-    <form action="/checkout" method="get"><button class="btn btn-primary mt-5" type="submit">Checkout</button></form>
-</div>
-
+    <form action="/payment" method="get">
+    <div class="card mt-4">
+        <input type="text" id="username" name="username" placeholder="username" required>
+        <input type="email" id="email" name="email" placeholder="email" required>
+        <input type="number" id="phone" name="phone" placeholder="phone" required>
+        <p>Billing address:</p>
+        <input type="text" id="country_billing" name="country_billing" placeholder="country" required>
+        <input type="text" id="city_billing" name="city_billing" placeholder="city" required>
+        <input type="text" id="zipcode_billing" name="zipcode_billing" placeholder="zipcode" required>
+        <input type="text" id="adress_billing" name="adress_billing" placeholder="adress" required>
+        <p>Shipping address:</p>
+        <input type="text" id="country_shipping" name="country_shipping" placeholder="country" required>
+        <input type="text" id="city_shipping" name="city_shipping" placeholder="city" required>
+        <input type="text" id="zipcode_shipping" name="zipcode_shipping" placeholder="zipcode" required>
+        <input type="text" id="adress_shipping" name="adress_shipping" placeholder="adress" required>
+    </div>
+    <button class="btn btn-primary mt-5" type="submit">Submit</button></form>
 </div>
 
 <div th:replace="footer.html :: copy"></div>

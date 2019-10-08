@@ -31,35 +31,13 @@
 <body>
 
 <div class="jumbotron text-center">
-    <h1>Cart</h1>
+    <h1>Checkout</h1>
 </div>
 
 <div class="container">
-    <table id="products" border="1">
-        <tbody>
-            <thead>
-                <th>name</th>
-                <th>quantity</th>
-                <th>price</th>
-            </thead>
-            <tr th:each="prod : ${products}">
-                <td th:text="${prod.key.name}"></td>
-                <td th:text="${prod.value}"></td>
-                <td th:text="${prod.key.price}"></td>
-                <td><a class="btn btn-warning" href="#">Remove</a></td>
-            </tr>
-        </tbody>
-        <tfoot>
-        <tr>
-            <td></td>
-            <td><b>Sum</b></td>
-            <td th:text="${sum}"></td>
-        </tr>
-        </tfoot>
-    </table>
-    <form action="/checkout" method="get"><button class="btn btn-primary mt-5" type="submit">Checkout</button></form>
-</div>
-
+    <div class="card mt-4">
+        <h1 th:text="${result}"></h1>
+    </div>
 </div>
 
 <div th:replace="footer.html :: copy"></div>
