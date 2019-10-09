@@ -26,6 +26,11 @@ import java.util.regex.Pattern;
 
 @WebServlet(urlPatterns = {"/"})
 public class ProductController extends HttpServlet {
+    public static ProductController getInstance() {
+        return instance;
+    }
+
+    private static ProductController instance = new ProductController();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
