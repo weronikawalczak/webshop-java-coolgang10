@@ -36,10 +36,27 @@
 
 <div class="container">
     <div id="categories" class="row">
-        <div class="card col col-sm-12 col-md-3 col-lg-2" th:each="category,iterStat : ${categories}">
-            <a href="#"><strong th:text="${category.name}"></strong></a>
+        <div class="card col col-sm-12 col-md-3 col-lg-2">
+            <!--            <a href="#"><strong th:text="${category.name}"></strong></a>-->
+            <form action="index.html" method="post">
+                <select name="selection" onchange='this.form.submit()'>
+                    <option>Sort by category or supplier</option>
+                    <optgroup label="Category">
+                        <option th:each="category : ${categories}" th:name="${category.name}"
+                                th:value="${category.id}" th:text="${category.name}">
+                        </option>
+                    </optgroup>
+                    <optgroup label="Supplier">
+                        <option th:each="supp : ${suppliers}" th:value="${supp.name} + ${supp.id}" th:text="${supp.name}"></option>
+                    </optgroup>
+                    <option value="0">Show all</option>
+                </select>
+                <noscript><input type="submit" value="Submit"></noscript>
+            </form>
         </div>
     </div>
+
+
 <!--    <div class="card" th:each="category,iterStat : ${categories}">-->
 <!--        <strong th:text="${category.name}">Category Title</strong>-->
 
