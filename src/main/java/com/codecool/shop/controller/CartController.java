@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.Map;
 
 import static java.lang.Integer.parseInt;
@@ -28,15 +29,25 @@ public class CartController extends HttpServlet {
 
         context.setVariable("products", cart.getAll());
         context.setVariable("test", cart.getAll().keySet());
-        context.setVariable("sum", cart.getSum());
+        DecimalFormat df = new DecimalFormat("#.##");
+        context.setVariable("sum", df.format(cart.getSum()));
         engine.process("cart/index.html", context, resp.getWriter());
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Integer prod_id = parseInt(req.getParameter("prod_id"));
-        cart.add(productDaoMem.find(prod_id));
-        resp.sendRedirect("/");
+        //add
+        if(req.getParameter("product_id") != null){
+            Integer productId = parseInt(req.getParameter("product_id"));
+            cart.add(productDaoMem.find(productId));
+            resp.sendRedirect("/");
+        }else {//
+            //remove
+            Integer prod_id = parseInt(req.getParameter("prod_id"));
+            cart.remove(prod_id);
+            cart.setSum(0);
+            resp.sendRedirect("/cart");
+        }
     }
 
 //    private int countItemsInCart(){

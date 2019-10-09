@@ -1,15 +1,13 @@
 package com.codecool.shop.model;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class Cart{
     private static Cart instance = null;
     Map<Product, Integer> data = new HashMap<>();
     private int numberOfProducts;
-    private float sum = 0;
+    private double sum = 0;
 
     private Cart() {}
 
@@ -21,8 +19,6 @@ public class Cart{
     }
 
     public void add(Product product) {
-        System.out.println(product);
-        System.out.println(data);
         if (data.containsKey(product)){
             int count = data.get(product) + 1;
             data.replace(product, count);
@@ -33,14 +29,19 @@ public class Cart{
         numberOfProducts++;
     }
     
-//    public Product find(int id) {
-//        //return data.stream().filter(t -> t.getId() == id).findFirst().orElse(null);
-//    }
+    public Product find(int id) {
+        for(Product product: data.keySet()){
+            if(product.id == id){
+                return product;
+            }
+        }
+        return null;
+    }
     
     public void remove(int id) {
-        //data.remove(find(id));
+        data.remove(find(id));
     }
-//
+
     public Map<Product, Integer> getAll() {
         return data;
     }
@@ -55,8 +56,12 @@ public class Cart{
 //        return data.stream().filter(t -> t.getProductCategory().equals(productCategory)).collect(Collectors.toList());
 //    }
 //
-    public float getSum() {
+    public double getSum() {
         return sum;
+    }
+
+    public void setSum(double sum) {
+        this.sum = sum;
     }
 //
 //    @Override

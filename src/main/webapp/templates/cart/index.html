@@ -46,7 +46,7 @@
                 <td th:text="${prod.key.name}"></td>
                 <td th:text="${prod.value}"></td>
                 <td th:text="${prod.key.price}"></td>
-                <td><a class="btn btn-warning" href="#">Remove</a></td>
+                <td></tf><form action="/cart" method="post"><input type="hidden" name="prod_id" th:value="${prod.key.id}"><button class="btn btn-primary mt-5" type="submit" value="remove">Remove</button></form></td>
             </tr>
         </tbody>
         <tfoot>
