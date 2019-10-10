@@ -1,5 +1,6 @@
 package com.codecool.shop.model;
 
+import java.text.DecimalFormat;
 import java.util.Currency;
 
 public class Product extends BaseModel {

@@ -38,15 +38,19 @@
         <div class="col col-sm-12 col-md-3 col-lg-2">
             <!--            <a href="#"><strong th:text="${category.name}"></strong></a>-->
             <form action="index.html" method="post">
-                <select name="selection" onchange='this.form.submit()'>
+                <select name="selected_category" onchange='this.form.submit()'>
                     <option>Sort by category or supplier</option>
                     <optgroup label="Category">
                         <option th:each="category : ${categories}" th:name="${category.name}"
-                                th:value="${category.id}" th:text="${category.name}">
+                                th:value="${category.id}" th:text="${category.name}"
+                                th:selected="(${category.id} == ${selectedCategory})">
                         </option>
                     </optgroup>
                     <optgroup label="Supplier">
-                        <option th:each="supp : ${suppliers}" th:value="${supp.name} + ${supp.id}" th:text="${supp.name}"></option>
+                        <option th:each="supp : ${suppliers}"
+                                th:value="${supp.name} + ${supp.id}"
+                                th:text="${supp.name}"
+                                th:selected="((${supp.name} + ${supp.id}) == ${selectedCategory})"></option>
                     </optgroup>
                     <option value="0">Show all</option>
                 </select>
@@ -72,10 +76,14 @@
                 </div>
                 <div class="card-body">
                     <div class="card-text">
-                        <p class="lead" th:text="${prod.getPrice()}">100 USD</p>
+                        <p class="lead" th:text="${#numbers.formatDecimal(prod.getDefaultPrice(), 0, 'COMMA', 2, 'POINT') + ' ' + prod.getDefaultCurrency()}">100 USD</p>
                     </div>
                     <div class="card-text">
-                        <form action="/cart" method="post"><input type="hidden" name="product_id" th:value="${prod.id}"><button class="btn btn-success" type="submit" value="add">Add to cart</button></form>
+                        <form action="/cart" method="post">
+                            <input type="hidden" name="product_id" th:value="${prod.id}">
+                            <input type="hidden" name="selected_category" th:value="${selectedCategory}">
+                            <button class="btn btn-success" type="submit" value="add">Add to cart</button>
+                        </form>
                     </div>
                 </div>
             </div>

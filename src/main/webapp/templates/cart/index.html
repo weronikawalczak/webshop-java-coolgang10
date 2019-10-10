@@ -58,12 +58,31 @@
                     </div>
                 </div>
             </td>
-            <td data-th="Price" th:text="${prod.key.price}">$1.99</td>
+            <td data-th="Price" th:text="${#numbers.formatDecimal(prod.key.defaultPrice, 0, 'COMMA', 2, 'POINT') + ' ' + prod.key.getDefaultCurrency()}">$1.99</td>
             <td data-th="Quantity">
-                <form action="/cart" method="post"><input type="number" name="quantity" class="form-control text-center" th:placeholder="${prod.value}"></form>
+                <table>
+                    <tr>
+                        <td>
+                            <form action="/cart" method="post">
+                                <input type="hidden" name="subtract" th:value="${prod.key.id}" />
+                                <button class="btn btn-primary">-</button>
+                            </form>
+                        </td>
+                        <td>
+                            <strong th:text="${prod.value}"></strong>
+                        </td>
+                        <td>
+                            <form action="/cart" method="post">
+                                <input type="hidden" name="add" th:value="${prod.key.id}" />
+                                <button class="btn btn-primary">+</button>
+                            </form>
+                        </td>
+                    </tr>
+                </table>
             </td>
 <!--            <td data-th="Subtotal" class="text-center" th:value="${prod.value} * ${prod.key.price}"></td>-->
-            <td data-th="Subtotal" class="text-center" th:text="${prod.key.defaultPrice} * ${prod.value}"></td>
+            <td data-th="Subtotal" class="text-center" th:text="${#numbers.formatDecimal((prod.key.defaultPrice * prod.value), 0, 'COMMA', 2, 'POINT') + ' ' + prod.key.getDefaultCurrency()}"></td>
+<!--            <span th:text="${#numbers.formatDecimal(orderSum, 0, 'COMMA', 2, 'POINT')}">1,145,000.52</span>-->
             <td class="actions" data-th="">
 <!--                <input type="hidden" name="prod_id" th:value="${prod.key.id}"><button class="btn btn-info btn-sm"><i class="fa fa-refresh"></i></button>-->
                 <form action="/cart" method="post"><input type="hidden" name="prod_id" th:value="${prod.key.id}"><button class="btn btn-danger btn-sm" type="submit" value="remove"><i class="fa fa-trash-o"></i></button></form>
@@ -76,7 +95,7 @@
             <td colspan="2" class="hidden-xs"></td>
             <td class="hidden-xs text-center">
                 <span><strong>Total</strong></span>
-                <span><strong th:text="${sum}"></strong></span>
+                <span><strong th:text="${#numbers.formatDecimal(sum, 0, 'COMMA', 2, 'POINT')}"></strong></span>
                 <span><strong> USD</strong></span></td>
             <td>
                 <form action="/checkout" method="get">

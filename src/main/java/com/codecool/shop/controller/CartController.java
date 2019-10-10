@@ -3,6 +3,7 @@ package com.codecool.shop.controller;
 import com.codecool.shop.config.TemplateEngineUtil;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.model.Cart;
+import com.codecool.shop.model.Product;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
@@ -29,23 +30,37 @@ public class CartController extends HttpServlet {
         WebContext context = new WebContext(req, resp, req.getServletContext());
 
         context.setVariable("products", cart.getAll());
-        DecimalFormat df = new DecimalFormat("#.##");
-        context.setVariable("sum", df.format(cart.getSum()));
+        context.setVariable("sum", cart.getSum());
         engine.process("cart/index.html", context, resp.getWriter());
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        //add
-
         if(req.getParameter("product_id") != null){
+            //add
             Integer productId = parseInt(req.getParameter("product_id"));
             cart.add(productDaoMem.find(productId));
-            resp.sendRedirect("/");
-        }else if(req.getParameter("prod_id") != null){//
+            resp.sendRedirect("");
+        }else if(req.getParameter("prod_id") != null) {//
             //remove
             Integer prod_id = parseInt(req.getParameter("prod_id"));
             cart.remove(prod_id);
+            resp.sendRedirect("/cart");
+        }else if(req.getParameter("add") != null){
+            for(Map.Entry<Product, Integer> entry: cart.getAll().entrySet()){
+                if(entry.getKey().getId() == Integer.parseInt(req.getParameter("add"))){
+                    cart.add(entry.getKey());
+                    break;
+                }
+            }
+            resp.sendRedirect("/cart");
+        }else if(req.getParameter("subtract") != null){
+            for(Map.Entry<Product, Integer> entry: cart.getAll().entrySet()){
+                if(entry.getKey().getId() == Integer.parseInt(req.getParameter("subtract"))){
+                    cart.subtract(entry.getKey());
+                    break;
+                }
+            }
             resp.sendRedirect("/cart");
         }else{
             req.getParameter("quantity");
