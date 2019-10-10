@@ -28,7 +28,6 @@ public class CartController extends HttpServlet {
         WebContext context = new WebContext(req, resp, req.getServletContext());
 
         context.setVariable("products", cart.getAll());
-        context.setVariable("test", cart.getAll().keySet());
         DecimalFormat df = new DecimalFormat("#.##");
         context.setVariable("sum", df.format(cart.getSum()));
         engine.process("cart/index.html", context, resp.getWriter());
@@ -41,11 +40,16 @@ public class CartController extends HttpServlet {
             Integer productId = parseInt(req.getParameter("product_id"));
             cart.add(productDaoMem.find(productId));
             resp.sendRedirect("/");
-        }else {//
+        }else if(req.getParameter("prod_id") != null){//
             //remove
             Integer prod_id = parseInt(req.getParameter("prod_id"));
             cart.remove(prod_id);
             resp.sendRedirect("/cart");
+        }else{
+            req.getParameter("quantity");
+            cart.changeQuantity(Integer.parseInt(req.getParameter("quantity")));
+            resp.sendRedirect("/cart");
         }
+
     }
 }
