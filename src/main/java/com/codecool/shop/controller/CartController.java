@@ -41,11 +41,16 @@ public class CartController extends HttpServlet {
             Integer productId = parseInt(req.getParameter("product_id"));
             cart.add(productDaoMem.find(productId));
             resp.sendRedirect("/");
-        }else {//
+        }else if(req.getParameter("prod_id") != null){//
             //remove
             Integer prod_id = parseInt(req.getParameter("prod_id"));
             cart.remove(prod_id);
             resp.sendRedirect("/cart");
+        }else{
+            req.getParameter("quantity");
+            cart.changeQuantity(Integer.parseInt(req.getParameter("quantity")));
+            resp.sendRedirect("/cart");
         }
+
     }
 }
