@@ -30,21 +30,22 @@
 
 <body>
 
-<div class="jumbotron text-center">
-    <h1>Payment</h1>
-</div>
 
 <div class="container">
-    <div class="card mt-4">
-        <p>Pick payment method: </p>
-        <form id="payment" action="/payment" method="post">
-        <select>
-            <option value="creditCard">Credit card</option>
-            <option value="paypal">Paypal</option>
-        </select>
-            <button class="btn btn-primary mt-5" type="submit">Submit</button>
+    <div class="card mt-4" style="position: center">
+        <div>
+            <img src="static/img/paypal.png" title="paypal" alt="paypal">
+        </div>
+        <form name="loginForm" action="/confirmation">
+            Username: <input type="text" name="username"/> <br/>
+            Password: <input type="password" name="password"/> <br/>
+            <input type="submit" value="Login"/>
         </form>
+        <div>
+            <img src="static/img/payment_methods.png" title="paypal" alt="paypal">
+        </div>
     </div>
+
 
 
 </div>

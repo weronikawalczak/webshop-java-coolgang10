@@ -36,28 +36,32 @@
 
 <div class="container">
     <div class="card mt-4">
-        <p>Pick payment method: </p>
+        <div class="thumbnail">
+            <img src="static/img/patmentMethodBig.png" title="Payment Methods" alt="Payments Methods">
 
-        <form action="/paymentMethod" method="post">
-            <input list="paymentMethods">
-            <datalist id="paymentMethods">
-                <option value="Internet Explorer">
-                <option value="Firefox">
-                <option value="Chrome">
-                <option value="Opera">
-                <option value="Safari">
-            </datalist>
-            <button class="btn btn-primary mt-5" type="submit">Submit</button>
+        </div>
+
+        <form action="/paymentMethod" method="post" id="formPayment">
+            <p style="font-size:30px">Pick payment method:</p>
+            <div >
+                <input type="radio" id="payPal"
+                       name="paymentMethod" value="payPal" checked>
+                <label for="payPal" style="font-size: 25px;" >PayPal</label>
+
+                <input type="radio" id="creditCard"
+                       name="paymentMethod" value="CreditCard">
+                <label for="creditCard" style="font-size: 25px;">Credit Card</label>
+
+            </div>
+
+                <button class="btn btn-primary mt-5 btn-lg" type="submit" id="payButton" >PAY</button>
+
         </form>
 
-
-<!--        <form id="payment" action="/paymentMethod" method="post">-->
-<!--        <select>-->
-<!--            <option value="creditCard">Credit card</option>-->
-<!--            <option value="paypal">Paypal</option>-->
-<!--        </select>-->
-<!--            <button class="btn btn-primary mt-5" type="submit">Submit</button>-->
-<!--        </form>-->
+        <div id="rightSide" style="font-size:30px; color: red">Cart Subtotal: 2000000</div>
+        <div>
+        <img src="static/img/cart_big.png" title="cart" alt="cart" style="position: absolute; right: 30px; top: 15px">
+        </div>
     </div>
 
 
