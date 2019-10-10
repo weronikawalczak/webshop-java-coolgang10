@@ -105,6 +105,8 @@ public class ProductController extends HttpServlet {
         int i = Integer.parseInt(matcher.group());
         return i;
     }
-
+    public String sendCategory(String category){
+        return category;
+    }
 
 }

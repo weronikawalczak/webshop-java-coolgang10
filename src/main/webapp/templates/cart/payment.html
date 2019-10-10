@@ -43,7 +43,7 @@
 
         <form action="/paymentMethod" method="post" id="formPayment">
             <p style="font-size:30px">Pick payment method:</p>
-            <div >
+            <div>
                 <input type="radio" id="payPal"
                        name="paymentMethod" value="payPal" checked>
                 <label for="payPal" style="font-size: 25px;" >PayPal</label>
@@ -52,13 +52,14 @@
                        name="paymentMethod" value="CreditCard">
                 <label for="creditCard" style="font-size: 25px;">Credit Card</label>
 
+
             </div>
 
                 <button class="btn btn-primary mt-5 btn-lg" type="submit" id="payButton" >PAY</button>
 
         </form>
 
-        <div id="rightSide" style="font-size:30px; color: red">Cart Subtotal: 2000000</div>
+        <div id="rightSide" style="font-size:30px; color: red" th:text="${'Cart Subtotal: '+ sum + ' USD'}"> </div>
         <div>
         <img src="static/img/cart_big.png" title="cart" alt="cart" style="position: absolute; right: 30px; top: 15px">
         </div>
