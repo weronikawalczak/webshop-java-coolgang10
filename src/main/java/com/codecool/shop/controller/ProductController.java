@@ -26,12 +26,12 @@ import java.util.regex.Pattern;
 
 @WebServlet(urlPatterns = {"/"})
 public class ProductController extends HttpServlet {
-
     public static ProductController getInstance() {
         return instance;
     }
 
     private static ProductController instance = new ProductController();
+    private String selectedCategory = "";
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -40,65 +40,44 @@ public class ProductController extends HttpServlet {
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
         SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
 
-
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
-//        context.setVariable("category", productCategoryDataStore.find(1));
+
         context.setVariable("categories", productCategoryDataStore.getAll());
-//        context.setVariable("products", productDataStore.getBy(productCategoryDataStore.find(1)));
-        context.setVariable("products", productDataStore.getAll());
         context.setVariable("suppliers", supplierDataStore.getAll());
+
+        renderProductsByCategory(context, productDataStore, productCategoryDataStore, supplierDataStore);
+
+        context.setVariable("selectedCategory", this.selectedCategory);
         engine.process("product/index.html", context, resp.getWriter());
-
-
     }
 
-    // // Alternative setting of the template context
-    // Map<String, Object> params = new HashMap<>();
-    // params.put("category", productCategoryDataStore.find(1));
-    // params.put("products", productDataStore.getBy(productCategoryDataStore.find(1)));
-    // context.setVariables(params);
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
-            throws IOException {
-        String selectedCategory = req.getParameter("selection");
-        TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
-        WebContext context = new WebContext(req, resp, req.getServletContext());
-        context.setVariable("currentCategory", selectedCategory);
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        this.selectedCategory = req.getParameter("selected_category");
+        resp.sendRedirect("");
+    }
 
-
-        ProductDao productDataStore = ProductDaoMem.getInstance();
-        ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
-        SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
-
-
-        context.setVariable("suppliers", supplierDataStore.getAll());
-
-        context.setVariable("categories", productCategoryDataStore.getAll());
-
-        if(selectedCategory.equals("0")){
+    private void renderProductsByCategory(WebContext context, ProductDao productDataStore, ProductCategoryDao productCategoryDataStore, SupplierDao supplierDataStore) {
+        if(this.selectedCategory.isEmpty()){
             context.setVariable("products", productDataStore.getAll());
+        } else if (chechIfStringNum(this.selectedCategory)){
+            context.setVariable("products", productDataStore.getBy(productCategoryDataStore.find(Integer.parseInt(this.selectedCategory))));
+        } else {
+           Supplier supplier = supplierDataStore.find(getFirstInt(this.selectedCategory));
+           List productDao = productDataStore.getBy(supplier);
+           System.out.println(productDao);
+           context.setVariable("products", productDao);
         }
-        else if (checkIfStringNum(selectedCategory)){
-            context.setVariable("products", productDataStore.getBy(productCategoryDataStore.find(Integer.parseInt(selectedCategory))));
-        }
-        else{
-           Supplier supplier = supplierDataStore.find(getFirstInt(selectedCategory));
-            List productDao = productDataStore.getBy(supplier);
-            context.setVariable("products", productDao);
     }
 
-        engine.process("product/index.html", context, resp.getWriter());
-
-
-//        response.sendRedirect("/shop");
-    }
-    private boolean checkIfStringNum(String text){
+    private boolean chechIfStringNum(String text){
         if(text.matches("^[0-9]*$")){
             return true;
         }
         return false;
     }
+
     private int getFirstInt(String text){
         Matcher matcher = Pattern.compile("\\d+").matcher(text);
         matcher.find();
@@ -106,4 +85,7 @@ public class ProductController extends HttpServlet {
         return i;
     }
 
+    public String sendCategory(String category){
+        return category;
+    }
 }

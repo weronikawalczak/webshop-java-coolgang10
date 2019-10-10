@@ -34,17 +34,15 @@
     <h1>Checkout</h1>
 </div>
 
-<div class="container">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8 order-md-1">
-                <form class="needs-validation" action="/checkout" method="post">
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <label for="username">Name</label>
-                            <input type="text" class="form-control" id="username" placeholder="" value="" required>
-                        </div>
+<div class="container align-items-center  w-50">
+        <div class="row text-center">
+            <div class="col-md-8 order-md-1 text-center w-100" style="margin:auto">
+                <form class="needs-validation text-center w-100" action="/checkout" method="post">
+                    <div class="mb-3">
+                        <label for="username">Name</label>
+                        <input type="text" class="form-control" id="username" placeholder="" value="" required>
                     </div>
+
 
                     <div class="mb-3">
                         <label for="email">Email </label>
@@ -54,7 +52,7 @@
                     <div class="mb-5">
                         <label for="phone">Phone number</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" id="phone" placeholder="" required>
+                            <input type="text" class="form-control" id="phone" required>
                         </div>
                     </div>
 
@@ -63,23 +61,23 @@
 
                     <div class="mb-3">
                         <label for="adress_billing">Address</label>
-                        <input type="text" class="form-control" id="adress_billing" placeholder="1234 Main St" required>
+                        <input type="text" class="form-control" id="adress_billing" required>
                     </div>
 
                     <div class="row">
                         <div class="col-md-5 mb-3">
                             <label for="country_billing">Country</label>
-                            <input type="text" class="form-control" id="country_billing" placeholder="Poland" required>
+                            <input type="text" class="form-control" id="country_billing" required>
                         </div>
 
                         <div class="col-md-4 mb-3">
                             <label for="city_billing">City</label>
-                            <input type="text" class="form-control" id="city_billing" placeholder="" required>
+                            <input type="text" class="form-control" id="city_billing" required>
                         </div>
 
                         <div class="col-md-3 mb-5">
                             <label for="zipcode_billing">Zip</label>
-                            <input type="text" class="form-control" id="zipcode_billing" placeholder="" required>
+                            <input type="text" class="form-control" id="zipcode_billing" required>
                         </div>
                     </div>
 
@@ -88,23 +86,23 @@
 
                     <div class="mb-3">
                         <label for="adress_shipping">Address</label>
-                        <input type="text" class="form-control" id="adress_shipping" placeholder="1234 Main St" required>
+                        <input type="text" class="form-control" id="adress_shipping" required>
                     </div>
 
                     <div class="row">
                         <div class="col-md-5 mb-3">
                             <label for="country_shipping">Country</label>
-                            <input type="text" class="form-control" id="country_shipping" placeholder="Poland" required>
+                            <input type="text" class="form-control" id="country_shipping" required>
                         </div>
 
                         <div class="col-md-4 mb-3">
                             <label for="city_shipping">City</label>
-                            <input type="text" class="form-control" id="city_shipping" placeholder="" required>
+                            <input type="text" class="form-control" id="city_shipping" equired>
                         </div>
 
                         <div class="col-md-3 mb-3">
                             <label for="zipcode_shipping">Zip</label>
-                            <input type="text" class="form-control" id="zipcode_shipping" placeholder="" required>
+                            <input type="text" class="form-control" id="zipcode_shipping" required>
                         </div>
                     </div>
 
@@ -114,7 +112,6 @@
                 </form>
             </div>
         </div>
-    </div>
 </div>
 <div th:replace="footer.html :: copy"></div>
 

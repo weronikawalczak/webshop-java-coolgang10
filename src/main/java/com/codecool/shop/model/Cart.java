@@ -27,6 +27,15 @@ public class Cart{
         sum += product.getDefaultPrice();
     }
 
+    public void subtract(Product product) {
+        if (data.containsKey(product) && data.get(product) > 1){
+            data.put(product, data.get(product) - 1);
+            sum -= product.getDefaultPrice();
+        }else if(data.containsKey(product)){
+            remove(product.getId());
+        }
+    }
+
     public void changeQuantity(int quantity){
 
     }
