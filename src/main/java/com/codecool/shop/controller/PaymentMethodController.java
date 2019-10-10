@@ -18,10 +18,18 @@ public class PaymentMethodController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
-//        WebContext context = new WebContext(req, resp, req.getServletContext());
-//        context.setVariable("products", "Ala");
-        System.out.println(req.getParameter("paymentMethod"));
-
+//        //creditCard
+//        if(req.getParameter("product_id") != null){
+//            Integer productId = parseInt(req.getParameter("product_id"));
+//            cart.add(productDaoMem.find(productId));
+//            resp.sendRedirect("/");
+//        }else {
+//        //paypal
+//            Integer prod_id = parseInt(req.getParameter("prod_id"));
+//            cart.remove(prod_id);
+//            cart.setSum(0);
+//            resp.sendRedirect("/cart");
+//        }
+        resp.getWriter().write( "User chose: " + req.getAttribute( "isTitles" ) );
     }
 }

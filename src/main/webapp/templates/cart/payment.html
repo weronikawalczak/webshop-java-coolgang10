@@ -39,25 +39,12 @@
         <p>Pick payment method: </p>
 
         <form action="/paymentMethod" method="post">
-            <input list="paymentMethods">
-            <datalist id="paymentMethods">
-                <option value="Internet Explorer">
-                <option value="Firefox">
-                <option value="Chrome">
-                <option value="Opera">
-                <option value="Safari">
-            </datalist>
+            <select id="paymentMethod" name="paymentMethod">
+                <option value="creditCard">Credit card</option>
+                <option value="paypal">Paypal</option>
+            </select>
             <button class="btn btn-primary mt-5" type="submit">Submit</button>
         </form>
-
-
-<!--        <form id="payment" action="/paymentMethod" method="post">-->
-<!--        <select>-->
-<!--            <option value="creditCard">Credit card</option>-->
-<!--            <option value="paypal">Paypal</option>-->
-<!--        </select>-->
-<!--            <button class="btn btn-primary mt-5" type="submit">Submit</button>-->
-<!--        </form>-->
     </div>
 
 

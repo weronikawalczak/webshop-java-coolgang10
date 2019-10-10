@@ -6,8 +6,7 @@ import java.util.Map;
 public class Cart{
     private static Cart instance = null;
     Map<Product, Integer> data = new HashMap<>();
-    private int numberOfProducts;
-    private double sum = 0;
+    private double sum;
 
     private Cart() {}
 
@@ -26,7 +25,6 @@ public class Cart{
             data.put(product, 1);
         }
         sum += product.getDefaultPrice();
-        numberOfProducts++;
     }
     
     public Product find(int id) {
@@ -39,23 +37,14 @@ public class Cart{
     }
     
     public void remove(int id) {
+        sum -= find(id).getDefaultPrice() * data.get(find(id));
         data.remove(find(id));
     }
 
     public Map<Product, Integer> getAll() {
         return data;
     }
-//
-//    @Override
-//    public List<Product> getBy(Supplier supplier) {
-//        return data.stream().filter(t -> t.getSupplier().equals(supplier)).collect(Collectors.toList());
-//    }
-//
-//    @Override
-//    public List<Product> getBy(ProductCategory productCategory) {
-//        return data.stream().filter(t -> t.getProductCategory().equals(productCategory)).collect(Collectors.toList());
-//    }
-//
+
     public double getSum() {
         return sum;
     }
@@ -63,9 +52,4 @@ public class Cart{
     public void setSum(double sum) {
         this.sum = sum;
     }
-//
-//    @Override
-//    public int getNumberOfProducts() {
-//        return 0;
-//    }
 }
