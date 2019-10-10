@@ -34,16 +34,39 @@
 <div class="container">
     <div class="card mt-4" style="position: center">
         <div>
-            <img src="static/img/paypal.png" title="paypal" alt="paypal">
-        </div>
-        <form name="loginForm" method="post" action="/confirmation">
-            Username: <input type="text" name="username"/> <br/>
-            Password: <input type="password" name="password"/> <br/>
-            <input type="submit" value="Login"/>
-        </form>
-        <div>
+        <img src="static/img/paypal.png" title="paypal" alt="paypal">
             <img src="static/img/payment_methods.png" title="paypal" alt="paypal">
         </div>
+        <form name="loginForm" method="post" action="/confirmation">
+            <div class="form-group">
+                <label for="exampleInputEmail1">Email address</label>
+                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Password</label>
+                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+            </div>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                <label class="form-check-label" for="exampleCheck1">I accept all your BS</label>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+        <div>
+
+        </div>
+        <div>
+
+        </div>
+<!--        <form name="loginForm" method="post" action="/confirmation">-->
+<!--            Username: <input type="text" name="username"/> <br/>-->
+<!--            Password: <input type="password" name="password"/> <br/>-->
+<!--            <input type="submit" value="Login"/>-->
+<!--        </form>-->
+
+
+
     </div>
 
 

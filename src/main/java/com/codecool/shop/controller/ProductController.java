@@ -59,7 +59,7 @@ public class ProductController extends HttpServlet {
     }
 
     private void renderProductsByCategory(WebContext context, ProductDao productDataStore, ProductCategoryDao productCategoryDataStore, SupplierDao supplierDataStore) {
-        if(this.selectedCategory.isEmpty()){
+        if(this.selectedCategory.isEmpty() || this.selectedCategory.equals("0")){
             context.setVariable("products", productDataStore.getAll());
         } else if (chechIfStringNum(this.selectedCategory)){
             context.setVariable("products", productDataStore.getBy(productCategoryDataStore.find(Integer.parseInt(this.selectedCategory))));
