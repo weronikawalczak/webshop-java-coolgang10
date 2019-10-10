@@ -8,6 +8,7 @@ import java.util.Map;
 public class Order {
     Map<Product, Integer> products = new HashMap<>();
     private ProductDaoMem productDaoMem = ProductDaoMem.getInstance();
+    private String status;
     private int id;
     private double price;
 
@@ -16,6 +17,7 @@ public class Order {
             this.products.put(productDaoMem.find(Integer.parseInt(product.getKey())), Integer.parseInt(product.getValue()[0]));
         }
         this.price=countPrice();
+        this.status = "unpaid";
     }
 
     private double countPrice(){
