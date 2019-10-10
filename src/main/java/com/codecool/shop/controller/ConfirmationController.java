@@ -25,6 +25,7 @@ public class ConfirmationController extends HttpServlet {
         if(Util.generateNumber() < probabilityOfWrongPayment){
             context.setVariable("result", "Payment confirmed!");
             context.setVariable("orderInfo", "details of the Order");
+            // w tym momecie sie zapisuje order i user?
         }else {
             context.setVariable("result", "Some problem with payment!");
             context.setVariable("errorInfo", "the details of the error");

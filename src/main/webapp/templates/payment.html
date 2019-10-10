@@ -31,27 +31,15 @@
 <body>
 
 <div class="jumbotron text-center">
-    <h1>Checkout</h1>
+    <h1>Payment</h1>
 </div>
 
 <div class="container">
-    <form action="/checkout" method="post">
     <div class="card mt-4">
-        <input type="text" id="username" name="username" placeholder="username" required>
-        <input type="email" id="email" name="email" placeholder="email" required>
-        <input type="number" id="phone" name="phone" placeholder="phone" required>
-        <p>Billing address:</p>
-        <input type="text" id="country_billing" name="country_billing" placeholder="country" required>
-        <input type="text" id="city_billing" name="city_billing" placeholder="city" required>
-        <input type="text" id="zipcode_billing" name="zipcode_billing" placeholder="zipcode" required>
-        <input type="text" id="adress_billing" name="adress_billing" placeholder="adress" required>
-        <p>Shipping address:</p>
-        <input type="text" id="country_shipping" name="country_shipping" placeholder="country" required>
-        <input type="text" id="city_shipping" name="city_shipping" placeholder="city" required>
-        <input type="text" id="zipcode_shipping" name="zipcode_shipping" placeholder="zipcode" required>
-        <input type="text" id="adress_shipping" name="adress_shipping" placeholder="adress" required>
+        <input type="text" id="username" name="username" placeholder="username">
+        <input type="email" id="email" name="email" placeholder="email">
+        <input type="number" id="phone" name="phone" placeholder="phone">
     </div>
-    <button class="btn btn-primary mt-5" type="submit">Submit</button></form>
 </div>
 
 <div th:replace="footer.html :: copy"></div>

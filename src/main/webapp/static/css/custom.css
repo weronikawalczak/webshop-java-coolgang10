@@ -2,12 +2,6 @@
    min-height: 150px;
 }
 
-#my_id {
-  background-image: url("../img/code.png");
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-}
-
 .glyphicon {
     margin-right:5px;
 }

@@ -45,13 +45,7 @@ public class CartController extends HttpServlet {
             //remove
             Integer prod_id = parseInt(req.getParameter("prod_id"));
             cart.remove(prod_id);
-            cart.setSum(0);
             resp.sendRedirect("/cart");
         }
     }
-
-//    private int countItemsInCart(){
-//        return  10;
-//    }
-//    //post na remove??
 }

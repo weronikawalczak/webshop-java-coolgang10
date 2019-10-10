@@ -24,7 +24,6 @@ public class PaymentController extends HttpServlet {
 
 //        context.setVariable("products", cartDao.getAll());
 //        context.setVariable("sum", cartDao.getSum());
-
         engine.process("cart/payment.html", context, resp.getWriter());
     }
 

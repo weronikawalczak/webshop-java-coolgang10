@@ -26,6 +26,10 @@
     <!-- End of Bootstrap components -->
 
     <link rel="stylesheet" type="text/css" href="/static/css/custom.css" />
+    <link rel="stylesheet" type="text/css" href="/static/css/cart.css" />
+
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
 </head>
 
 <body>
@@ -34,35 +38,109 @@
     <h1>Cart</h1>
 </div>
 
-<div class="container">
-    <table id="products" border="1">
+<div class="container mb-3">
+    <table id="cart" class="table table-hover table-condensed">
+        <thead>
+        <tr>
+            <th style="width:35%"><h3>Product</h3></th>
+            <th style="width:20%"><h3>Price</h3></th>
+            <th style="width:8%"><h3>Quantity</h3></th>
+            <th style="width:22%" class="text-center"><h3>Subtotal</h3></th>
+            <th style="width:15%"></th>
+        </tr>
+        </thead>
         <tbody>
-            <thead>
-                <th>name</th>
-                <th>quantity</th>
-                <th>price</th>
-            </thead>
-            <tr th:each="prod : ${products}">
-                <td th:text="${prod.key.name}"></td>
-                <td th:text="${prod.value}"></td>
-                <td th:text="${prod.key.price}"></td>
-                <td></tf><form action="/cart" method="post"><input type="hidden" name="prod_id" th:value="${prod.key.id}"><button class="btn btn-primary mt-5" type="submit" value="remove">Remove</button></form></td>
-            </tr>
+        <tr th:each="prod : ${products}">
+            <td data-th="Product">
+                <div class="row mb-2">
+                    <div class="col-sm-10">
+                        <h5 class="nomargin" th:text="${prod.key.name}"></h5>
+                    </div>
+                </div>
+            </td>
+            <td data-th="Price" th:text="${prod.key.price}">$1.99</td>
+            <td data-th="Quantity">
+                <input type="number" class="form-control text-center" th:value="${prod.value}">
+            </td>
+<!--            <td data-th="Subtotal" class="text-center" th:value="${prod.value} * ${prod.key.price}"></td>-->
+            <td data-th="Subtotal" class="text-center"></td>
+            <td class="actions" data-th="">
+                <form action="/cart" method="post"><input type="hidden" name="prod_id" th:value="${prod.key.id}"><button class="btn btn-danger btn-sm" type="submit" value="remove"><i class="fa fa-trash-o"></i></button></form>
+            </td>
+        </tr>
         </tbody>
         <tfoot>
         <tr>
-            <td></td>
-            <td><b>Sum</b></td>
-            <td th:text="${sum}"></td>
+            <td><form action="/" method="get"><button class="btn btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</button></form></td>
+            <td colspan="2" class="hidden-xs"></td>
+            <td class="hidden-xs text-center">
+                <span><strong>Total</strong></span>
+                <span><strong th:text="${sum}"></strong></span>
+                <span><strong> USD</strong></span></td>
+            <td>
+                <form action="/checkout" method="get">
+                <span th:each="prod : ${products}">
+                    <input type="hidden" th:name="${prod.key.id}" th:value="${prod.value}">
+                </span>
+                    <button class="btn btn-success btn-block" type="submit">Checkout <i class="fa fa-angle-right"></i></button>
+                </form>
+            </td>
         </tr>
         </tfoot>
     </table>
-    <form action="/checkout" method="get"><button class="btn btn-primary mt-5" type="submit">Checkout</button></form>
 </div>
 
-</div>
+
+    <!--        <span th:each="prod : ${products}">-->
+    <!--            <input type="hidden" th:name="${prod.key.id}" th:value="${prod.value}">-->
+    <!--        </span>-->
+    <!--        <button class="btn btn-primary mt-5" type="submit">Checkout</button>-->
+    <!--    </form>-->
+
+
+<!--<div class="container mb-5">-->
+<!--    <table id="products" border="1">-->
+<!--        <tbody>-->
+<!--            <thead>-->
+<!--                <th>name</th>-->
+<!--                <th>quantity</th>-->
+<!--                <th>price</th>-->
+<!--            </thead>-->
+<!--            <tr th:each="prod : ${products}">-->
+<!--                <td th:text="${prod.key.name}"></td>-->
+<!--                <td th:text="${prod.value}"></td>-->
+<!--                <td th:text="${prod.key.defaultPrice} * ${prod.value}"></td>-->
+<!--                <td><form action="/cart" method="post"><input type="hidden" name="prod_id" th:value="${prod.key.id}"><button class="btn btn-primary mt-5" type="submit" value="remove">Remove</button></form></td>-->
+<!--            </tr>-->
+<!--        </tbody>-->
+<!--        <tfoot>-->
+<!--        <tr>-->
+<!--            <td></td>-->
+<!--            <td><b>Sum</b></td>-->
+<!--            <td th:text="${sum}"></td>-->
+<!--        </tr>-->
+<!--        </tfoot>-->
+<!--    </table>-->
+<!--    <form action="/checkout" method="get">-->
+<!--        <span th:each="prod : ${products}">-->
+<!--            <input type="hidden" th:name="${prod.key.id}" th:value="${prod.value}">-->
+<!--        </span>-->
+<!--        <button class="btn btn-primary mt-5" type="submit">Checkout</button>-->
+<!--    </form>-->
+<!--</div>-->
+
+<!--</div>-->
+
+<!--<div class="mb-3"></div>-->
 
 <div th:replace="footer.html :: copy"></div>
 
 </body>
 </html>
+
+
+
+
+
+
+
