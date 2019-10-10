@@ -14,7 +14,7 @@ import com.codecool.shop.model.Supplier;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
-
+//TODO payment product
 @WebListener
 public class Initializer implements ServletContextListener {
 

@@ -26,6 +26,7 @@ public class CheckoutController extends HttpServlet {
 
         order = new Order(req.getParameterMap());
 
+
         WebContext context = new WebContext(req, resp, req.getServletContext());
         engine.process("cart/checkout.html", context, resp.getWriter());
     }
