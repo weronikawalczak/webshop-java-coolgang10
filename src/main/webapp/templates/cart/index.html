@@ -63,7 +63,7 @@
                 <form action="/cart" method="post"><input type="number" name="quantity" class="form-control text-center" th:placeholder="${prod.value}"></form>
             </td>
 <!--            <td data-th="Subtotal" class="text-center" th:value="${prod.value} * ${prod.key.price}"></td>-->
-            <td data-th="Subtotal" class="text-center" th:value="${prod.key.defaultPrice}"></td>
+            <td data-th="Subtotal" class="text-center" th:text="${prod.key.defaultPrice} * ${prod.value}"></td>
             <td class="actions" data-th="">
 <!--                <input type="hidden" name="prod_id" th:value="${prod.key.id}"><button class="btn btn-info btn-sm"><i class="fa fa-refresh"></i></button>-->
                 <form action="/cart" method="post"><input type="hidden" name="prod_id" th:value="${prod.key.id}"><button class="btn btn-danger btn-sm" type="submit" value="remove"><i class="fa fa-trash-o"></i></button></form>
