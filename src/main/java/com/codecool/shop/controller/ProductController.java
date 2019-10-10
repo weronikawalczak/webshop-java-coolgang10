@@ -26,6 +26,7 @@ import java.util.regex.Pattern;
 
 @WebServlet(urlPatterns = {"/"})
 public class ProductController extends HttpServlet {
+
     public static ProductController getInstance() {
         return instance;
     }
@@ -61,16 +62,16 @@ public class ProductController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws IOException {
         String selectedCategory = req.getParameter("selection");
-//        System.out.println(selectedCategory.matches(".*\\d.*"));
-        System.out.println(getFirstInt(selectedCategory));
+        TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
+        WebContext context = new WebContext(req, resp, req.getServletContext());
+        context.setVariable("currentCategory", selectedCategory);
+
 
         ProductDao productDataStore = ProductDaoMem.getInstance();
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
         SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
 
-        TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
-        WebContext context = new WebContext(req, resp, req.getServletContext());
-//        context.setVariable("category", productCategoryDataStore.find(1));
+
         context.setVariable("suppliers", supplierDataStore.getAll());
 
         context.setVariable("categories", productCategoryDataStore.getAll());
@@ -78,13 +79,12 @@ public class ProductController extends HttpServlet {
         if(selectedCategory.equals("0")){
             context.setVariable("products", productDataStore.getAll());
         }
-        else if (chechIfStringNum(selectedCategory)){
+        else if (checkIfStringNum(selectedCategory)){
             context.setVariable("products", productDataStore.getBy(productCategoryDataStore.find(Integer.parseInt(selectedCategory))));
         }
         else{
            Supplier supplier = supplierDataStore.find(getFirstInt(selectedCategory));
             List productDao = productDataStore.getBy(supplier);
-            System.out.println(productDao);
             context.setVariable("products", productDao);
     }
 
@@ -93,7 +93,7 @@ public class ProductController extends HttpServlet {
 
 //        response.sendRedirect("/shop");
     }
-    private boolean chechIfStringNum(String text){
+    private boolean checkIfStringNum(String text){
         if(text.matches("^[0-9]*$")){
             return true;
         }
@@ -104,9 +104,6 @@ public class ProductController extends HttpServlet {
         matcher.find();
         int i = Integer.parseInt(matcher.group());
         return i;
-    }
-    public String sendCategory(String category){
-        return category;
     }
 
 }
