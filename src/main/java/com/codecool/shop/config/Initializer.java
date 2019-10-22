@@ -17,7 +17,11 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 import javax.sql.DataSource;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.SQLException;
+import java.util.Properties;
 
 @WebListener
 public class Initializer implements ServletContextListener {
@@ -73,10 +77,20 @@ public class Initializer implements ServletContextListener {
     private static DataSource connect() throws SQLException {
         PGSimpleDataSource dataSource = new PGSimpleDataSource();
 
-        dataSource.setDatabaseName("codecoolshop");
-        dataSource.setUser("weronika");
-        dataSource.setPassword("1234");
-        dataSource.getConnection().close();
+        try (InputStream input = new FileInputStream("src/main/resources/connection.properties")) {
+
+            Properties prop = new Properties();
+
+            prop.load(input);
+
+            dataSource.setDatabaseName(prop.getProperty("db.name"));
+            dataSource.setUser(prop.getProperty("db.user"));
+            dataSource.setPassword(prop.getProperty("db.password"));
+            dataSource.getConnection().close();
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
 
         return dataSource;
     }
