@@ -23,7 +23,6 @@ public class CartController extends HttpServlet {
     Cart cart = Cart.getInstance();
     ProductDaoMem productDaoMem = ProductDaoMem.getInstance();
 
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
@@ -70,6 +69,5 @@ public class CartController extends HttpServlet {
             cart.changeQuantity(Integer.parseInt(req.getParameter("quantity")));
             resp.sendRedirect("/cart");
         }
-
     }
 }
