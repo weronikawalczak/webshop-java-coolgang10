@@ -4,7 +4,7 @@ import com.codecool.shop.config.TemplateEngineUtil;
 import com.codecool.shop.dao.implementation.UserDaoMem;
 import com.codecool.shop.model.Address;
 import com.codecool.shop.model.Order;
-import com.codecool.shop.model.User;
+import com.codecool.shop.model.UserAddress;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
 
 @WebServlet(urlPatterns = {"/checkout"})
 public class CheckoutController extends HttpServlet {
@@ -48,8 +47,7 @@ public class CheckoutController extends HttpServlet {
                 req.getParameter("zipcode_billing"),
                 req.getParameter("adress_billing"));
 
-
-        User user = new User(
+        UserAddress user = new UserAddress(
                 req.getParameter("name"),
                 req.getParameter("username"),
                 req.getParameter("email"),

@@ -1,38 +1,41 @@
 package com.codecool.shop.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.security.NoSuchAlgorithmException;
 
 public class User {
-    int id;
-    String name;
     String username;
     String email;
-    String phoneNumber;
-    Address shippingAddress;
-    Address billingAddress;
-    List<Order> orders;
+    String hashedPass;
 
-    public User(String name, String username, String email, String phoneNumber, Address shippingAddress, Address billingAddress) {
-        this.name = name;
+    public User(String username, String email, String hashedPass) throws NoSuchAlgorithmException {
         this.username = username;
         this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.shippingAddress = shippingAddress;
-        this.billingAddress = billingAddress;
-        this.orders = new ArrayList<>();
+//        this.hashedPass = Util.hashPass(hashedPass);
+        this.hashedPass = hashedPass;
     }
 
-    public void addOrder(Order order){
-        orders.add(order);
+    public String getUsername() {
+        return username;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public int getId() {
-        return id;
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getHashedPass() {
+        return hashedPass;
+    }
+
+    public void setHashedPass(String hashedPass) {
+        this.hashedPass = hashedPass;
     }
 
 }

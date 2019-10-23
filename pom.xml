@@ -59,6 +59,13 @@
             <artifactId>postgresql</artifactId>
             <version>42.2.5</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.mindrot</groupId>
+            <artifactId>jbcrypt</artifactId>
+            <version>0.3m</version>
+        </dependency>
+
         <!-- See comment at jetty plugin -->
         <!-- <dependency> -->
         <!--   <groupId>org.eclipse.jetty</groupId> -->

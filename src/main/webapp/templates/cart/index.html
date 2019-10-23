@@ -98,7 +98,7 @@
                 <span><strong th:text="${#numbers.formatDecimal(sum, 0, 'COMMA', 2, 'POINT')}"></strong></span>
                 <span><strong> USD</strong></span></td>
             <td>
-                <form action="/checkout" method="get">
+                <form action="/registration" method="get">
                 <span th:each="prod : ${products}">
                     <input type="hidden" th:name="${prod.key.id}" th:value="${prod.value}">
 

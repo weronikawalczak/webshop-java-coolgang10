@@ -1,18 +1,13 @@
 package com.codecool.shop.dao.implementation;
 
 
-import com.codecool.shop.dao.ProductDao;
-import com.codecool.shop.model.Product;
-import com.codecool.shop.model.ProductCategory;
-import com.codecool.shop.model.Supplier;
-import com.codecool.shop.model.User;
+import com.codecool.shop.model.UserAddress;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class UserDaoMem {
-    private List<User> users = new ArrayList<>();
+    private List<UserAddress> users = new ArrayList<>();
     private static UserDaoMem instance = null;
 
     private UserDaoMem() {}
@@ -24,12 +19,12 @@ public class UserDaoMem {
         return instance;
     }
 
-    public void add(User user) {
+    public void add(UserAddress user) {
         user.setId(users.size() + 1);
         users.add(user);
     }
 
-    public User find(int id){
+    public UserAddress find(int id){
         return users.stream().filter(t -> t.getId() == id).findFirst().orElse(null);
     }
 
@@ -37,7 +32,7 @@ public class UserDaoMem {
         users.remove(find(id));
     }
 
-    public List<User> getUsers() {
+    public List<UserAddress> getUsers() {
         return users;
     }
 }
