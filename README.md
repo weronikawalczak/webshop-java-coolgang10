@@ -1,6 +1,6 @@
-# Codecool Online Shop
+# Online Shop
 
-Java SE: Web Project skeleton
+An online eCommerce web-application with Java, where users can browse products, add them into a shopping cart, checkout items and make payments. 
 
 # Install
 
