@@ -8,3 +8,11 @@ Import this project to IntelliJ as a Maven project.
 IntelliJ can auto-install the dependencies based on the pom.xml
 
 ## Technologies
+* Java Servlets
+* Thymeleaf
+* HTML, CSS, Bootstrap
+
+## Screenshots
+
+## Status
+Project is finished.
